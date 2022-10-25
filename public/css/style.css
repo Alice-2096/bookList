@@ -1,0 +1,155 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    margin-top: 0;
+    background-color: #4E5F29;
+}
+body > *  {
+    margin: auto;
+    width: 95%;
+}
+
+@media screen and (max-width: 767px){
+    #reading-girl {
+        display: none;
+    }
+}
+
+/* header  */
+.header-container {
+    position: relative;
+}
+#reading-girl {
+    width: 120px;
+    position: absolute;
+    right: 60px;
+    top: 20px;
+    z-index: 0;
+}
+#welcome {
+    position: relative;
+    z-index: 1;
+}
+.header-top {
+    background-color: #CDD993;
+    display: flex;
+    align-items: center;
+    padding: 30px 0px 15px 30px;
+}
+.header-top img {
+    width: 100px;
+    margin-right: 30px;
+}
+.header-bottom {
+    background-color: #CDD993;
+    padding: 0px 0px 20px 140px;
+    width: 100%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.search-bar {
+     background-color: #E9E5C0;
+     width: 90%;
+     padding: 5px 0 5px 5px;
+     border-radius: 5px;
+     display: flex;
+     align-items: center;
+}
+.search-bar img{
+    margin-right: 5px;
+}
+.search-bar input {
+    border: none;
+    background-color: #E9E5C0;
+    width: 90%;
+}
+.search-bar input:focus {
+    outline: none;
+}
+
+/* adding a book section  */
+.add-book {
+    background:#283115;
+    border-radius: 5px;
+    padding: 10px 0 10px 15px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 140px;
+} 
+.add-book img{
+    width: 25px;
+    margin-right: 10px;
+}
+.add-book input {
+    background-color: #283115;
+    outline: none;
+    border: none;
+    color: white;
+    width: 90%;
+}
+.add-book input::placeholder {
+    color:white;
+}
+.add-book input:focus {
+    outline: none;
+}
+
+/* main container  */
+.main-container h2 {
+    color: white;
+    margin: 10px;
+    display: inline-block;
+}
+.main-container h2:hover {
+    color: #CDD993;
+}
+.main-container .book-title-bar {
+    display: flex;
+    align-items: center;
+    padding: 5px 0 5px 0;
+}
+.main-container .book-toggle-btn {
+    border: 2px solid darkslategray;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    margin-right: 5px;
+} 
+.main-container .star-btn {
+    width: 20px;
+    margin-left: auto;
+    margin-right: 50px;
+}
+.main-container .star-btn:hover {
+    animation: rotate-star 1s;
+}
+@keyframes rotate-star {
+    0% {
+        rotate: 0deg;
+    }
+    100% {
+        rotate: 360deg;
+    }
+}
+.main-container li {
+    background-color: #F2E8CF;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    list-style-type: none;
+    padding: 5px 0 5px 15px;
+}
+
+/* footer */
+.footer {
+    text-align: center;
+    padding: 10px 0 20px 0;
+}
+
