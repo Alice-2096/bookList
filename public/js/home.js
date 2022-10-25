@@ -21,10 +21,10 @@ completedContainer.addEventListener('click', function (e) {
 });
 
 //book toggle button
-booksContainer.addEventListener('click', function (e) {
+completedContainer.addEventListener('click', function (e) {
   if (
     e.target.classList.contains('book-toggle-btn') &&
-    e.target.parentNode.parentNode.classList.contains('to-read')
+    e.target.parentNode.parentNode.classList.contains('finished')
   ) {
     var content =
       e.target.parentNode.parentNode.children[1].children[0].innerHTML;
@@ -32,6 +32,7 @@ booksContainer.addEventListener('click', function (e) {
       e.target.parentNode.parentNode.children[0].children[1].innerHTML;
     //create a new li element and fill in content
     let bookContent = document.createElement('li');
+    bookContent.classList.add('to-read');
     bookContent.innerHTML = `
     <div class="book-title-bar">
         <button class="book-toggle-btn"></button>
@@ -42,6 +43,33 @@ booksContainer.addEventListener('click', function (e) {
         <p>${content}</p>
     </div>`;
     //remove the current li and add new li
+    e.target.parentNode.parentNode.remove();
+    booksContainer.children[1].appendChild(bookContent);
+  }
+});
+
+booksContainer.addEventListener('click', function (e) {
+  if (
+    e.target.classList.contains('book-toggle-btn') &&
+    e.target.parentNode.parentNode.classList.contains('to-read')
+  ) {
+    var content =
+      e.target.parentNode.parentNode.children[1].children[0].innerHTML;
+    var booktitle =
+      e.target.parentNode.parentNode.children[0].children[1].innerHTML;
+
+    let bookContent = document.createElement('li');
+    bookContent.classList.add('finished');
+    bookContent.innerHTML = `
+    <div class="book-title-bar">
+        <button class="book-toggle-btn"></button>
+        <h4 class="book-title">${booktitle}</h4>
+        <img class="star-btn" src="../public/imgs/star.svg"></img>
+    </div>
+    <div class="book-desc-hidden">
+        <p>${content}</p>
+    </div>`;
+
     e.target.parentNode.parentNode.remove();
     completedContainer.children[1].appendChild(bookContent);
   }
