@@ -6,10 +6,9 @@ const booksContainer = document.querySelector('.books-to-read');
 const completedContainer = document.querySelector('.completed');
 const titleBar = document.querySelector('.book-title-bar');
 const btn = document.querySelector('.book-toggle-btn');
-const bookDes = document.querySelector('.book-desc');
-const list = document.querySelector('.to-read');
+const newbookTitle = document.getElementById('newbook-title');
 
-//modal window -- event bubbling
+//modal dropdown window -- event bubbling
 booksContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('book-title'))
     e.target.parentNode.nextElementSibling.classList.toggle('book-desc-hidden');
@@ -72,6 +71,27 @@ booksContainer.addEventListener('click', function (e) {
 
     e.target.parentNode.parentNode.remove();
     completedContainer.children[1].appendChild(bookContent);
+  }
+});
+
+//add a book to the booklist
+newbookTitle.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    let title = e.target.value;
+    let booklist = document.createElement('li');
+    booklist.classList.add('to-read');
+    booklist.innerHTML = `
+    <div class="book-title-bar">
+    <button class="book-toggle-btn"></button>
+    <h4 class="book-title">${title}</h4>
+    <img class="star-btn" src="../public/imgs/star.svg"></img>
+    </div>
+    <div class="book-desc-hidden">
+    <p></p>
+    </div>
+    `;
+    booksContainer.children[1].appendChild(booklist);
+    e.target.value = '';
   }
 });
 
