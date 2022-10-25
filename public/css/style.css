@@ -105,7 +105,7 @@ body > *  {
 /* main container  */
 .main-container h2 {
     color: white;
-    margin: 10px;
+    padding: 10px;
     display: inline-block;
 }
 .main-container h2:hover {
@@ -122,11 +122,18 @@ body > *  {
     height: 20px;
     border-radius: 10px;
     margin-right: 5px;
+    background-color: #e2eea7;
 } 
+.completed .book-toggle-btn{
+    background-color: #4E5F29;
+}
+.main-container .book-title {
+    width: 100%;
+}
 .main-container .star-btn {
     width: 20px;
-    margin-left: auto;
-    margin-right: 50px;
+    position: absolute;
+    right: 60px;
 }
 .main-container .star-btn:hover {
     animation: rotate-star 1s;
