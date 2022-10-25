@@ -5,8 +5,83 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #CDD993;
+            font-family: 'Roboto', sans-serif;
+        }
+        #header-title {
+            font-family: 'Cabin Sketch', cursive;
+            font-size: 60px;
+        }
+        #read-icon {
+            width: 150px;
+            display: block;
+            z-index: -1;
+        }
+        .login-container {
+            background-color: #f6fed0;
+            width: 40%;
+            margin: auto;
+            border-radius: 5px;
+            box-shadow: 0 0 5px black;
+            display: flex;
+            flex-direction: column;
+            padding: 10px 20px 20px 20px;
+        }
+        .login-container input {
+            display: block;
+            width: 80%;
+            height: 2rem;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+        .log-in-btn {
+            width: 80%;
+            background-color: #CDD993;
+            margin: auto;
+            margin-top: 40px;
+            margin-bottom: 60px;
+            height: 2rem;
+            font-weight: bolder;
+        }
+        .log-in-btn:hover {
+            background-color: #939d63;
+        }
+        .login-bottom {
+            color: #627019;
+        }
+        #signup {
+            text-decoration: none;
+        }
+        #signup:visited {
+            color: rgb(54, 68, 30);
+        }
+    </style>
 </head>
 <body>
-    
+    <img id="read-icon" src="../public/imgs/reading.svg" alt="reading-img">
+    <h1 id="header-title">My Booklist</h1>
+    <div class="login-container">
+        <h2>Log In to Your Account</h2>
+        <input id="login-text" type="text" placeholder="Email, phone, or username">
+        <input id="pwd" type="text" placeholder="Password">
+        <button class="log-in-btn">Log In</button>
+        <div class="login-bottom">
+            <span>Need an account?</span> 
+            <a id='signup' href="">Sign Up</a>
+        </div>
+        
+    </div>
 </body>
 </html>
