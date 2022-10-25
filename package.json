@@ -2,7 +2,8 @@
   "name": "booklist",
   "version": "1.0.0",
   "description": "The Plan: The frontend is composed of a main page is where user can view and modify (add, delete, adjust priority, view book descriptions, etc.) their booklist.",
-  "main": "index.js",
+  "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,7 +18,12 @@
   },
   "homepage": "https://github.com/Alice-2096/bookList#readme",
   "dependencies": {
+    "compression": "^1.7.4",
     "esm": "^3.2.25",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20",
+    "path": "^0.12.7"
   }
 }
