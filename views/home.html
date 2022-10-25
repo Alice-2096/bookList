@@ -35,24 +35,24 @@
         <section class="books-to-read">
             <h2>Books To Read</h2>
             <ul>
-                <li>
+                <li class="to-read">
                     <div class="book-title-bar">
                         <button class="book-toggle-btn"></button>
                         <h4 class="book-title">The Ethics of Technology</h4>
                         <img class="star-btn" src="../public/imgs/star.svg"></img>
                     </div>
-                    <div class="book-desc">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.</p>
+                    <div class="book-desc-hidden">
+                        <p id="content"> FIRST --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.</p>
                     </div>
                 </li>
-                <li>
+                <li class="to-read">
                     <div class="book-title-bar">
                         <button class="book-toggle-btn"></button>
-                        <h4 class="book-title">The Ethics of Technology</h4>
+                        <h4 class="book-title">Heidegger's Being and Time</h4>
                         <img class="star-btn" src="../public/imgs/star.svg"></img>
                     </div>
-                    <div class="book-desc">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.</p>
+                    <div class="book-desc-hidden">
+                        <p id="content"> Second --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.</p>
                     </div>
                 </li>
             </ul>
@@ -61,14 +61,14 @@
         <section class="completed">
             <h2>Finished Reading</h2>
             <ul>
-                <li>
+                <li class="finished">
                     <div class="book-title-bar">
                         <button class="book-toggle-btn"></button>
-                        <h4 class="book-title">The Ethics of Technology</h4>
+                        <h4 class="book-title">The Second Sex</h4>
                         <img class="star-btn" src="../public/imgs/star.svg"></img>
                     </div>
-                    <div class="book-desc">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.</p>
+                    <div class="book-desc-hidden">
+                        <p> Third --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.</p>
                     </div>
                 </li>
             </ul>
@@ -76,7 +76,8 @@
     </div>
 
     <footer class="footer">
-        Copyright &copy 2022 
+        Copyright &copy <span id="date"></span> 
     </footer>
+    <script src="../public/js/home.js"></script>
 </body>
 </html>

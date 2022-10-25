@@ -5,7 +5,9 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   },
   "homepage": "https://github.com/Alice-2096/bookList#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "compression": "^1.7.4",
     "esm": "^3.2.25",
     "express": "^4.18.2",

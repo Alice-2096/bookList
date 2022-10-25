@@ -6,9 +6,7 @@ import { join } from 'path';
 import session from 'express-session';
 import compression from 'compression';
 import morgan from 'morgan';
-
 import home from './routes/home/home.js';
-import login from './routes/api/login.js';
 import login_page from './routes/home/login_page.js';
 import { get } from 'http';
 
@@ -26,10 +24,11 @@ app.set('view engine', 'pug');
 app.use(morgan(':method - :url - :date - :response-time ms'));
 app.listen(3000, () => console.log('Booklist server is running on port 3000'));
 
+//GET
 app.get('/', (req, res) => {
   res.sendFile(join(__dirname, 'views', 'home.html'));
 });
 
-app.get('/login', (req, res) => {
+app.route('/login').get((req, res) => {
   res.sendFile(join(__dirname, 'views', 'login.html'));
 });

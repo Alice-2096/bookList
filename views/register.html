@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #CDD993;
+            font-family: 'Roboto', sans-serif;
+        }
+        #header-title {
+            font-family: 'Cabin Sketch', cursive;
+            font-size: 60px;
+        }
+        #read-icon {
+            width: 150px;
+            display: block;
+            z-index: -1;
+        }
+        .login-container {
+            background-color: #f6fed0;
+            width: 30%;
+            margin: auto;
+            border-radius: 5px;
+            box-shadow: 0 0 5px black;
+            display: flex;
+            flex-direction: column;
+            padding: 10px 30px 20px 30px;
+        }
+        .login-container form {
+            text-align: left;
+            margin: auto;
+            width: 80%;
+        }
+        .login-container input {
+            display: block;
+            width: 100%;
+            height: 2rem;
+            margin-bottom: 20px;
+        }
+        .log-in-btn {
+            width: 80%;
+            background-color: #CDD993;
+            margin: auto;
+            margin-top: 40px;
+            margin-bottom: 60px;
+            height: 2rem;
+            font-weight: bolder;
+        }
+        .log-in-btn:hover {
+            background-color: #939d63;
+        }
+        .login-bottom {
+            color: #627019;
+        }
+        #error-message {
+            display: none;
+        }
+        #error-message-show {
+            display: '';
+            color: red;
+        }
+        #signup {
+            text-decoration: none;
+        }
+        #signup:visited {
+            color: rgb(54, 68, 30);
+        }
+        
+    </style>
+</head>
+<body>
+    <img id="read-icon" src="../public/imgs/reading.svg" alt="reading-img">
+    <h1 id="header-title">
+            Hello! <br> 
+            Welcome to My Booklist!
+    </h1>
+    <div class="login-container">
+        <h2>Register for a New Account</h2>
+        <form action="">
+            <label for="user">Username</label>
+            <input id="login-text" name="name" type="text" placeholder="Username">
+        </form>
+        
+        <form action="">
+            <label for="email">Email</label>
+            <input id="login-text" name="email" type="text" placeholder="Email">
+        </form>
+        <form action="">
+            <label for="user">Password</label>
+            <input id="pwd" name="pwd" type="text" placeholder="Password">
+        </form>
+        <button class="log-in-btn">Register</button>
+        <p id="error-message">Username already in use</p>
+        <div class="login-bottom">
+            <span>Already have an Account?</span> 
+            <a id='signup' href="./login.html">Log in</a>
+        </div>
+    </div>
+    <script src="../public/js/login.js"></script>
+</body>
+</html>
