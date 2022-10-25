@@ -1,11 +1,7 @@
 # Fullstack Project -- Booklist
 
-The Plan:
-The frontend is composed of a main page is where user can view and modify (add, delete, adjust priority, view book descriptions, etc.) their booklist.
+The frontend will be composed of a main page and a login page. On the main page, user can view and modify their booklist -- search, add, delete, adjust priority, view book descriptions, etc. User can log into their account through the login page. There may also be an admin page where administrators may access and modify user accounts. 
 
-The app backend runs on Node.js to respond to HTML requests.
-    REST APIs: 
-        - add a book 
-        - add a book description 
+The app backend will run on Node.js to respond to HTML requests.
 
-MySQL is used as an interface with the database.
+MySQL or MongoDB will be used to interact with the database.
