@@ -9,7 +9,7 @@ import morgan from 'morgan';
 import home from './routes/home/home.js';
 import login_page from './routes/home/login_page.js';
 import { get } from 'http';
-import e from 'express';
+import protectRoute from './utils/protectRoute.js';
 
 const app = express(); //give us access to express methods
 const __filename = fileURLToPath(import.meta.url);
@@ -49,7 +49,7 @@ app.get('/', (req, res) =>
   req.session.user ? res.redirect('/home') : res.redirect('/login')
 );
 
-app.get('/home', (req, res) => {
+app.get('/home', protectRoute(), (req, res) => {
   res.render('home', {
     user: req.session.user,
     email: 'iamalice123@yahoo.com',
