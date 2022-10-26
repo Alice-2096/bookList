@@ -31,10 +31,11 @@ app.use(
     name: 'sessId', //cookie name to be set in the user's browser
     resave: false, //mandatory setting -- save to session store even if it has not been changed
     saveUninitialized: true, //store uninitialized session into the store
-    secret:
-      app.get('env') === 'production'
-        ? process.env.sessionSecrete //in the production setting, we manually set an environment variable
-        : '2bb3jldsioh4dhshkds',
+    secret: process.env.sessionSecret,
+
+    // app.get('env') === 'production'
+    //   ? process.env.sessionSecrete //in the production setting, we manually set an environment variable
+    //   : '2bb3jldsioh4dhshkds',
     //secrete is used to encrypt the session cookie so that you can be reasonably sure the cookie isn't a fake one
     cookie: {
       httpOnly: true,
