@@ -8,8 +8,8 @@ MySQL or MongoDB will be used to interact with the database.
 
 ## Demo
 
-- Homepage
+- ### Homepage
 ![homepage-demo](/demo/homepage.gif)
 
-- SignIn Page
+- ### SignIn Page
 ![sign-in-demo]
