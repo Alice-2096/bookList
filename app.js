@@ -24,7 +24,7 @@ app.use('/public', express.static(join(__dirname, 'public')));
 app.use(morgan(':method - :url - :date - :response-time ms'));
 app.set('view engine', 'pug');
 
-// connect to resources -- i.e, database -- before the Express server goes online
+// connect to resources -- i.e, database -- before the Express server goes online -- use promise.all to connect to ALL resources
 Promise.all([connectToDb()])
   .then(() =>
     app.listen(3000, () =>
