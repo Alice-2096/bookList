@@ -1,14 +1,18 @@
 const dateFooter = document.getElementById('date');
 const date = new Date();
-
-//booklist
 const booksContainer = document.querySelector('.books-to-read');
 const completedContainer = document.querySelector('.completed');
 const titleBar = document.querySelector('.book-title-bar');
 const btn = document.querySelector('.book-toggle-btn');
 const newbookTitle = document.getElementById('newbook-title');
+const logoutBtn = document.getElementById('logout');
 
-//modal dropdown window -- event bubbling
+//header -- logout button -- redirect to the log out page onclick
+logoutBtn.addEventListener('click', function () {
+  location.href = './home/logout';
+});
+
+//modal dropdown window
 booksContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('book-title'))
     e.target.parentNode.nextElementSibling.classList.toggle('book-desc-hidden');
@@ -74,7 +78,7 @@ booksContainer.addEventListener('click', function (e) {
   }
 });
 
-//add a book to the booklist
+//add a new book to the booklist
 newbookTitle.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     let title = e.target.value;

@@ -33,6 +33,18 @@ body > *  {
     top: 20px;
     z-index: 0;
 }
+#logout {
+    position: absolute;
+    right: 80px;
+    top: 0;
+    background-color: #8ba94c;
+    border-radius: 5px;
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+}
+#logout:hover {
+    background-color: #667b37;
+    color: white;
+}
 #welcome {
     position: relative;
     z-index: 1;

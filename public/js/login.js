@@ -1,7 +1,9 @@
 const account = document.getElementById('login-text');
 const pwd = document.getElementById('pwd');
-const btn = document.querySelector('.log-in-btn');
+const loginBtn = document.querySelector('.log-in-btn');
 const err = document.getElementById('error-message');
+
+loginBtn.addEventListener('click', () => (location.href = '/'));
 
 // Authentication: get the username and pwd, check if it is correct. If correct, redirect to homepage; if not, display error message.
 

@@ -1,0 +1,52 @@
+html 
+    head
+        link(rel='stylesheet' href='../public/css/style.css')
+    body 
+        header.header-container
+            img#reading-girl(src='../public/imgs/reading.svg' alt='reading-girl')
+            .header-top
+                span#logout Log Out
+                img(src='../public/imgs/female-icon.svg' alt='female-icon')
+                .header-welcome
+                    h1#welcome= "Welcome to " + user + "'s Booklist"
+                    h3#email= email 
+            .header-bottom
+                .search-bar
+                    img(src='../public/imgs/magnifier.svg' alt='magnifier')
+                    input(type='text' placeholder='Search for a book to read')
+        section.add-book
+            img(src='../public/imgs/plus.svg' alt='add-book')
+            input#newbook-title(type='text' placeholder='Add a Book')
+        
+        .main-container
+            section.books-to-read
+                h2 Books To Read
+                ul
+                    li.to-read
+                        .book-title-bar
+                            button.book-toggle-btn
+                            h4.book-title The Ethics of Technology
+                            img.star-btn(src='../public/imgs/star.svg')
+                        .book-desc-hidden
+                            p#content
+                                FIRST --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.
+                    li.to-read
+                        .book-title-bar
+                            button.book-toggle-btn
+                            h4.book-title Heidegger&apos;s Being and Time
+                            img.star-btn(src='../public/imgs/star.svg')
+                        .book-desc-hidden
+                            p#content Second --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.
+            section.completed
+                h2 Finished Reading
+                ul
+                    li.finished
+                        .book-title-bar
+                            button.book-toggle-btn
+                            h4.book-title The Second Sex
+                            img.star-btn(src='../public/imgs/star.svg')
+                        .book-desc-hidden
+                            p Third --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.
+        footer.footer Copyright &amp;copy 
+            span#date
+        script(src='../public/js/home.js')
