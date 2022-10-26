@@ -10,6 +10,7 @@ import home from './routes/home/home.js';
 import login_page from './routes/home/login_page.js';
 import { get } from 'http';
 import protectRoute from './utils/protectRoute.js';
+import connectToDb from './db/index.js';
 
 const app = express(); //give us access to express methods
 const __filename = fileURLToPath(import.meta.url);
@@ -22,7 +23,18 @@ app.use(express.json());
 app.use('/public', express.static(join(__dirname, 'public')));
 app.use(morgan(':method - :url - :date - :response-time ms'));
 app.set('view engine', 'pug');
-app.listen(3000, () => console.log('Booklist server is running on port 3000'));
+
+// connect to resources -- i.e, database -- before the Express server goes online
+Promise.all([connectToDb()])
+  .then(() =>
+    app.listen(3000, () =>
+      console.log('Booklist server is running on port 3000')
+    )
+  )
+  .catch((error) => {
+    console.error(`mongoDB atlas error: ${error}`);
+    process.exit();
+  });
 
 //Session
 app.use(
