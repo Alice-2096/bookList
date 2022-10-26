@@ -9,6 +9,7 @@ import morgan from 'morgan';
 import home from './routes/home/home.js';
 import login_page from './routes/home/login_page.js';
 import { get } from 'http';
+import e from 'express';
 
 const app = express(); //give us access to express methods
 const __filename = fileURLToPath(import.meta.url);
@@ -23,10 +24,34 @@ app.use(morgan(':method - :url - :date - :response-time ms'));
 app.set('view engine', 'pug');
 app.listen(3000, () => console.log('Booklist server is running on port 3000'));
 
+//Session
+app.use(
+  '/',
+  session({
+    name: 'sessId', //cookie name to be set in the user's browser
+    resave: false, //mandatory setting -- save to session store even if it has not been changed
+    saveUninitialized: true, //store uninitialized session into the store
+    secret:
+      app.get('env') === 'production'
+        ? process.env.sessionSecrete //in the production setting, we manually set an environment variable
+        : '2bb3jldsioh4dhshkds',
+    //secrete is used to encrypt the session cookie so that you can be reasonably sure the cookie isn't a fake one
+    cookie: {
+      httpOnly: true,
+      maxAge: 18000000, //duration of cookie
+      secure: app.get('env') === 'production' ? true : false, //true -- cookie can be read during secure HTTP connection
+    },
+  })
+);
+
 //GET
-app.get('/', (req, res) => {
+app.get('/', (req, res) =>
+  req.session.user ? res.redirect('/home') : res.redirect('/login')
+);
+
+app.get('/home', (req, res) => {
   res.render('home', {
-    user: 'Alice Jiang',
+    user: req.session.user,
     email: 'iamalice123@yahoo.com',
     booklist: [
       {
@@ -57,6 +82,21 @@ app
   .get((req, res) => {
     res.sendFile(join(__dirname, 'views', 'login.html'));
   })
-  .post((req, res) => res.redirect('./views/home.html')); //direct to homepage when log in
+  .post((req, res) => {
+    //parse req body
+    const { username, email } = req.body;
 
-app.get('/home/logout', (req, res) => res.redirect('/login'));
+    if (true) {
+      //! authentication
+      req.session.user = 'Alice'; //!fetch user data from database based on the authentication info
+      //direct to homepage if logged in successfully
+      return res.redirect('/');
+    }
+    res.redirect('/login');
+  });
+
+app.get('/home/logout', (req, res) => {
+  //delete user session data when he logs out
+  delete req.session.user;
+  res.redirect('/login');
+});

@@ -3,9 +3,9 @@ const pwd = document.getElementById('pwd');
 const loginBtn = document.querySelector('.log-in-btn');
 const err = document.getElementById('error-message');
 
-loginBtn.addEventListener('click', () => (location.href = '/'));
+// loginBtn.addEventListener('click', () => (location.href = '/'));
 
-// Authentication: get the username and pwd, check if it is correct. If correct, redirect to homepage; if not, display error message.
+// Authentication using XMLHttpRequest: get the username and pwd, check if it is correct. If correct, redirect to homepage; if not, display error message.
 
 // const form = {
 //   username: account,

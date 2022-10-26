@@ -81,9 +81,11 @@
     <h1 id="header-title">My Booklist</h1>
     <div class="login-container">
         <h2>Log In to Your Account</h2>
-        <input id="login-text" name="name" type="text" placeholder="Email, phone, or username">
-        <input id="pwd" type="text" name="pwd" placeholder="Password">
-        <button class="log-in-btn">Log In</button>
+        <form action="" method="POST" class="login-form">
+            <input id="login-text" name="name" type="text" placeholder="Email, phone, or username">
+            <input id="pwd" type="text" name="pwd" placeholder="Password">
+            <button type="submit" class="log-in-btn">Log In</button>
+        </form>
         <p id="error-message">Password Incorrect</p>
         <div class="login-bottom">
             <span>Need an account?</span> 
