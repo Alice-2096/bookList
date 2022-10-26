@@ -1,0 +1,8 @@
+each book in booklist 
+    li.to-read
+        .book-title-bar
+            button.book-toggle-btn
+            h4.book-title=book.title  
+            img.star-btn(src='../public/imgs/star.svg')
+        .book-desc-hidden
+            p#content=book.desc 

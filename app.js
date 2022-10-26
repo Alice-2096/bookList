@@ -28,14 +28,25 @@ app.get('/', (req, res) => {
   res.render('home', {
     user: 'Alice Jiang',
     email: 'iamalice123@yahoo.com',
-    booksToRead: [
-      {},
-      {}
-    ]
-    finishedBooks: [
-      {}
-    ]
-
+    booklist: [
+      {
+        id: 1,
+        title: 'The Ethics of Technology',
+        desc: 'First --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.',
+      },
+      {
+        id: 2,
+        title: "Heidegger's Being and Time",
+        desc: 'Second --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.',
+      },
+    ],
+    finishedBooklist: [
+      {
+        id: 1,
+        title: 'The Second Sex',
+        desc: 'Third --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.',
+      },
+    ],
   });
   // ! update when setting up database
   // res.sendFile(join(__dirname, 'views', 'home.html')); -- for rending static files

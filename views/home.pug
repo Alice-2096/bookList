@@ -22,31 +22,11 @@ html
             section.books-to-read
                 h2 Books To Read
                 ul
-                    li.to-read
-                        .book-title-bar
-                            button.book-toggle-btn
-                            h4.book-title The Ethics of Technology
-                            img.star-btn(src='../public/imgs/star.svg')
-                        .book-desc-hidden
-                            p#content
-                                FIRST --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.
-                    li.to-read
-                        .book-title-bar
-                            button.book-toggle-btn
-                            h4.book-title Heidegger&apos;s Being and Time
-                            img.star-btn(src='../public/imgs/star.svg')
-                        .book-desc-hidden
-                            p#content Second --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.
+                    include partials/booklist.pug
             section.completed
                 h2 Finished Reading
-                ul
-                    li.finished
-                        .book-title-bar
-                            button.book-toggle-btn
-                            h4.book-title The Second Sex
-                            img.star-btn(src='../public/imgs/star.svg')
-                        .book-desc-hidden
-                            p Third --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.
+                ul 
+                    include partials/finishedBooklist.pug 
         footer.footer Copyright &amp;copy 
             span#date
         script(src='../public/js/home.js')
