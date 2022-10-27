@@ -2,6 +2,10 @@ const account = document.getElementById('login-text');
 const pwd = document.getElementById('pwd');
 const loginBtn = document.querySelector('.log-in-btn');
 const err = document.getElementById('error-message');
+const registerBtn = document.getElementById('signup');
+registerBtn.addEventListener('click', function () {
+  location.href = './signup';
+});
 
 // loginBtn.addEventListener('click', () => (location.href = '/'));
 

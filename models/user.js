@@ -5,16 +5,16 @@ import bcrypt from 'bcrypt';
 const userSchema = new Schema({
   name: {
     type: String,
-    required: true,
+    require: true,
   },
   email: {
     type: String,
+    require: true,
     unique: true,
-    required: true,
   },
   password: {
     type: String,
-    required: true,
+    require: true,
   },
   createdAt: {
     type: Date,
@@ -26,11 +26,6 @@ const userSchema = new Schema({
   },
 });
 
-//convert schema to a model -- (model_name, schema)
-const User = model('User', userSchema);
-//a model will allow us to generate a user according to the user schema
-//model name usually begins with an uppercase letter
-
 //encrypt the user password right before it is saved to MongoDB
 userSchema.pre('save', function (next) {
   if (!this.isModified('password')) {
@@ -40,11 +35,11 @@ userSchema.pre('save', function (next) {
   next();
 });
 
-//mongoose method is a function that has access to the current document/object instance
+//mongoose method is a function that has access to the current document
 //check password
-userSchema.method.checkPassword = async function (password) {
+userSchema.methods.checkPassword = async function (password) {
   try {
-    const match = await bcrypt.compare(password, this.password); //bcrypt.compare(A,B) returns a boolean object
+    const match = await bcrypt.compare(password, this.password); //(raw pwd, hashed pwd) --- bcrypt.compare(A,B) returns a boolean object
     if (match) {
       return Promise.resolve();
     }
@@ -56,11 +51,16 @@ userSchema.method.checkPassword = async function (password) {
 
 //update the last-log-in stamp
 //note: use function () instead of ()=> so that we can access 'this' object
-userSchema.method.updateLoggedIn = function () {
+userSchema.methods.updateLoggedIn = function () {
   return this.model('User').findOneAndUpdate(
     { email: this.email },
     { lastLoggedIn: new Date() }
   );
 };
+
+//convert schema to a model -- (model_name, schema)
+const User = model('User', userSchema);
+//a model will allow us to generate a user according to the user schema
+//model name usually begins with an uppercase letter
 
 export default User;

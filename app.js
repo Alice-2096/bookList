@@ -6,11 +6,14 @@ import { join } from 'path';
 import session from 'express-session';
 import compression from 'compression';
 import morgan from 'morgan';
+import moment from 'moment';
 import home from './routes/home/home.js';
 import login_page from './routes/home/login_page.js';
 import { get } from 'http';
 import protectRoute from './utils/protectRoute.js';
 import connectToDb from './db/index.js';
+import { signUp } from './controllers/user.js';
+import { logIn } from './controllers/user.js';
 
 const app = express(); //give us access to express methods
 const __filename = fileURLToPath(import.meta.url);
@@ -64,8 +67,11 @@ app.get('/', (req, res) =>
 
 app.get('/home', protectRoute(), (req, res) => {
   res.render('home', {
-    user: req.session.user,
-    email: 'iamalice123@yahoo.com',
+    user: req.session.user.name,
+    lastLoggedIn: moment(req.session.user.lastLoggedIn).format(
+      'MMMM, Do YYYY, h:mm:ss a'
+    ),
+    email: req.session.user.email,
     booklist: [
       {
         id: 1,
@@ -95,17 +101,21 @@ app
   .get((req, res) => {
     res.sendFile(join(__dirname, 'views', 'login.html'));
   })
-  .post((req, res) => {
-    //parse req body
-    const { username, pwd } = req.body;
-
-    if (true) {
-      //! authentication
-      req.session.user = 'Alice'; //!fetch user data from database based on the authentication info
-      //direct to homepage if logged in successfully
-      return res.redirect('/');
+  .post(async (req, res) => {
+    try {
+      const { name, pwd } = req.body;
+      const user = await logIn({ name, pwd }); //why do we need await here
+      req.session.user = {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        lastLoggedIn: user.lastLoggedIn,
+      };
+      return res.redirect('/home');
+    } catch (error) {
+      console.log(error);
+      res.redirect('/login');
     }
-    res.redirect('/login');
   });
 
 app.get('/home/logout', (req, res) => {
@@ -113,3 +123,19 @@ app.get('/home/logout', (req, res) => {
   delete req.session.user;
   res.redirect('/login');
 });
+
+app
+  .route('/signup')
+  .get((req, res) => {
+    res.sendFile(join(__dirname, 'views', 'register.html'));
+  })
+  .post(async (req, res) => {
+    try {
+      const { name, email, password } = req.body;
+      await signUp({ name, email, password });
+      return res.redirect('/login');
+    } catch (error) {
+      console.log(error);
+      res.redirect('/signup');
+    }
+  });
