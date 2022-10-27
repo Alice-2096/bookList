@@ -97,7 +97,7 @@ app
   })
   .post((req, res) => {
     //parse req body
-    const { username, email } = req.body;
+    const { username, pwd } = req.body;
 
     if (true) {
       //! authentication
