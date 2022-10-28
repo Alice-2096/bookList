@@ -103,9 +103,8 @@ app
   })
   .post(async (req, res) => {
     try {
-      const { name, pwd } = req.body;
-      console.log(pwd);
-      const user = await logIn({ name, pwd });
+      const { name, password } = req.body;
+      const user = await logIn({ name, password }); //function param names need to match!
       req.session.user = {
         id: user._id,
         name: user.name,
