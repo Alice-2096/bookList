@@ -11,5 +11,7 @@ MySQL or MongoDB will be used to interact with the database.
 - ### Homepage
 ![homepage-demo](/demo/homepage.gif)
 
-- ### SignIn Page
-![sign-in-demo]
+- ### SignIn, SignUp and SignOut
+![sign-in-demo](/demo/login_signup.gif)
+
+- ### Booklist Features: Add, Delete, Change Category, and Edit. 
