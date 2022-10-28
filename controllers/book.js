@@ -1,7 +1,7 @@
-import Book from '../models/book';
+import Book from '../models/book.js';
 
 export const getBooksToRead = (email) => {
-  return Book.find({ finishedReading: false }).populate('user');
+  return Book.find({ finishedReading: false }).populate('user', 'name _id');
   //! need to fix this logic
 
   //fetch all the to-read-books based on Book's reference to the User model -- specifically the user's email address

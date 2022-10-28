@@ -23,7 +23,7 @@ completedContainer.addEventListener('click', function (e) {
     e.target.parentNode.nextElementSibling.classList.toggle('book-desc-hidden');
 });
 
-//book toggle button
+//book toggle button: finished --> to read
 completedContainer.addEventListener('click', function (e) {
   if (
     e.target.classList.contains('book-toggle-btn') &&
@@ -51,6 +51,7 @@ completedContainer.addEventListener('click', function (e) {
   }
 });
 
+//book toggle button: to-read ---> finished
 booksContainer.addEventListener('click', function (e) {
   if (
     e.target.classList.contains('book-toggle-btn') &&
@@ -78,6 +79,10 @@ booksContainer.addEventListener('click', function (e) {
   }
 });
 
+function sendNewBookTitle() {
+  //send the title through a XMLHttp post request
+}
+
 //add a new book to the booklist
 newbookTitle.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
@@ -96,6 +101,9 @@ newbookTitle.addEventListener('keydown', (e) => {
     `;
     booksContainer.children[1].appendChild(booklist);
     e.target.value = '';
+
+    //send title with AJAX
+    sendNewBookTitle();
   }
 });
 

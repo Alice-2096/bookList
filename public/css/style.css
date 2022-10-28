@@ -45,7 +45,7 @@ body > *  {
     background-color: #667b37;
     color: white;
 }
-#welcome {
+#welcome, #email {
     position: relative;
     z-index: 1;
 }

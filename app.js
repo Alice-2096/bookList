@@ -14,7 +14,7 @@ import protectRoute from './utils/protectRoute.js';
 import connectToDb from './db/index.js';
 import { signUp } from './controllers/user.js';
 import { logIn } from './controllers/user.js';
-import { getBooksToRead } from '/controllers/book.js';
+import { getBooksToRead } from './controllers/book.js';
 import { getFinishedBooks } from './controllers/book.js';
 import { addBookToRead } from './controllers/book.js';
 import { deleteBook } from './controllers/book.js';
@@ -73,15 +73,17 @@ app.get('/', (req, res) =>
 // ! fix this part
 
 app.get('/home', protectRoute(), async (req, res) => {
-  //get user's booklist from db based on one's email
-  try {
-    const toReadList = await getBooksToRead(req.session.user.email).lean();
-    const finishedList = await getFinishedBooks(req.session.user.email).lean();
-    //! how to convert mongoose document to an array of JSON objects
-    Promise.resolve();
-  } catch (error) {
-    Promise.reject(error);
-  }
+  var toReadList = [],
+    finishedList = [];
+  // //get user's booklist from db based on one's email
+  // try {
+  //   const toReadList = getBooksToRead(req.session.user.email)._doc;
+  //   const finishedList = await getFinishedBooks(req.session.user.email).lean();
+  //   //? how to convert mongoose document to an array of JSON objects
+  //   Promise.resolve();
+  // } catch (error) {
+  //   Promise.reject(error);
+  // }
 
   res.render('home', {
     user: req.session.user.name,
@@ -91,14 +93,12 @@ app.get('/home', protectRoute(), async (req, res) => {
     email: req.session.user.email,
     booklist: toReadList,
     finishedBooklist: finishedList,
-    // finishedBooklist: [
-    //   {
-    //     id: 1,
-    //     title: 'The Second Sex',
-    //     desc: 'Third --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.',
-    //   },
-    // ],
   });
+});
+
+//update db when adding a new book
+app.post('/home', (req, res) => {
+  //AJAX -- receive data from /home and update DB
 });
 
 app
