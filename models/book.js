@@ -3,7 +3,7 @@ const { ObjectId } = Schema.Types;
 
 const bookSchema = new Schema({
   title: { type: String, required: true },
-  content: { type: String, required: true },
+  content: { type: String },
   user: {
     type: ObjectId,
     ref: 'User', //refer to another model
