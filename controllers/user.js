@@ -13,8 +13,7 @@ export const signUp = async ({ name, email, password }) => {
 //fetch, authentication, and update the user based on log-In credentials
 export const logIn = async ({ name, password }) => {
   try {
-    const user = await User.findOne({ name: name });
-    console.log(user);
+    const user = await User.findOne({ name });
     await user.checkPassword(password);
     await user.updateLoggedIn();
     return Promise.resolve(user); //return user if log in successfully

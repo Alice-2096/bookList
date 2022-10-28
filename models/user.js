@@ -38,14 +38,11 @@ userSchema.pre('save', function (next) {
 //mongoose method is a function that has access to the current document
 //check password
 userSchema.methods.checkPassword = async function (password) {
-  try {
-    const match = await bcrypt.compare(password, this.password); //(raw pwd, hashed pwd) --- bcrypt.compare(A,B) returns a boolean object
-    if (match) {
-      return Promise.resolve();
-    }
+  const match = await bcrypt.compare(password, this.password);
+  if (match) {
+    return Promise.resolve();
+  } else {
     return Promise.reject();
-  } catch (error) {
-    return Promise.reject(error);
   }
 };
 

@@ -104,7 +104,8 @@ app
   .post(async (req, res) => {
     try {
       const { name, pwd } = req.body;
-      const user = await logIn({ name, pwd }); //why do we need await here
+      console.log(pwd);
+      const user = await logIn({ name, pwd });
       req.session.user = {
         id: user._id,
         name: user.name,
