@@ -14,6 +14,16 @@ const bookSchema = new Schema({
   createdAt: { type: Boolean, default: true },
 });
 
+bookSchema.methods.changeCategory = async function () {
+  if (this.finishedReading) {
+    this.finishedReading = false;
+    return Promise.resolve();
+  } else {
+    this.finishedReading = true;
+    return Promise.reject();
+  }
+};
+
 const Book = model('Book', bookSchema);
 
 export default Book;

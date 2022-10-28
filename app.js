@@ -14,6 +14,11 @@ import protectRoute from './utils/protectRoute.js';
 import connectToDb from './db/index.js';
 import { signUp } from './controllers/user.js';
 import { logIn } from './controllers/user.js';
+import { getBooksToRead } from '/controllers/book.js';
+import { getFinishedBooks } from './controllers/book.js';
+import { addBookToRead } from './controllers/book.js';
+import { deleteBook } from './controllers/book.js';
+import { changeBookCategory } from './controllers/book.js';
 
 const app = express(); //give us access to express methods
 const __filename = fileURLToPath(import.meta.url);
@@ -93,7 +98,6 @@ app.get('/home', protectRoute(), (req, res) => {
     ],
   });
   // ! update when setting up database
-  // res.sendFile(join(__dirname, 'views', 'home.html')); -- for rending static files
 });
 
 app
