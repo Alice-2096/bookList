@@ -70,34 +70,35 @@ app.get('/', (req, res) =>
   req.session.user ? res.redirect('/home') : res.redirect('/login')
 );
 
-app.get('/home', protectRoute(), (req, res) => {
+// ! fix this part
+
+app.get('/home', protectRoute(), async (req, res) => {
+  //get user's booklist from db based on one's email
+  try {
+    const toReadList = await getBooksToRead(req.session.user.email).lean();
+    const finishedList = await getFinishedBooks(req.session.user.email).lean();
+    //! how to convert mongoose document to an array of JSON objects
+    Promise.resolve();
+  } catch (error) {
+    Promise.reject(error);
+  }
+
   res.render('home', {
     user: req.session.user.name,
     lastLoggedIn: moment(req.session.user.lastLoggedIn).format(
       'MMMM, Do YYYY, h:mm:ss a'
     ),
     email: req.session.user.email,
-    booklist: [
-      {
-        id: 1,
-        title: 'The Ethics of Technology',
-        desc: 'First --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.',
-      },
-      {
-        id: 2,
-        title: "Heidegger's Being and Time",
-        desc: 'Second --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.',
-      },
-    ],
-    finishedBooklist: [
-      {
-        id: 1,
-        title: 'The Second Sex',
-        desc: 'Third --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.',
-      },
-    ],
+    booklist: toReadList,
+    finishedBooklist: finishedList,
+    // finishedBooklist: [
+    //   {
+    //     id: 1,
+    //     title: 'The Second Sex',
+    //     desc: 'Third --- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero repudiandae corrupti id aperiam rem molestiae quasi numquam. Doloremque sequi exercitationem, est facere temporibus labore nesciunt aspernatur similique voluptates earum odit.',
+    //   },
+    // ],
   });
-  // ! update when setting up database
 });
 
 app
