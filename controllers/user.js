@@ -29,6 +29,6 @@ export const findUser = async (email) => {
     const user = await User.findOne({ email });
     return Promise.resolve(user);
   } catch (error) {
-    return Promise.reject(error);
+    return Promise.reject('User Not Found!');
   }
 };

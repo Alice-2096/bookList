@@ -18,8 +18,8 @@ export const getFinishedBooks = (email) => {
   //! need to fix this logic
 };
 
-export const addBookToRead = (title) => {
-  return Book.create({ title: title });
+export const addBookToRead = (title, user) => {
+  return Book.create({ title: title, user: user });
 };
 
 export const deleteBook = (id) => {

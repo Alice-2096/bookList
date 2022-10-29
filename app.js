@@ -87,10 +87,11 @@ app.get('/home', protectRoute(), async (req, res) => {
   });
 });
 
-//update db when adding a new book
-app.post('/home/api/books/new', (req, res) => {
+//update db when adding a new book along with user info
+app.post('/home/api/books/new', async (req, res) => {
   const { bookTitle } = req.body;
-  addBookToRead(bookTitle);
+  const user = await findUser(req.session.user.email);
+  addBookToRead(bookTitle, user);
   res.send('new book created!');
 });
 
