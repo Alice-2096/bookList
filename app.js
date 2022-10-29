@@ -71,20 +71,10 @@ app.get('/', (req, res) =>
   req.session.user ? res.redirect('/home') : res.redirect('/login')
 );
 
-// ! fix this part
-
 app.get('/home', protectRoute(), async (req, res) => {
-  var toReadList = getBooksToRead().lean(),
-    finishedList = getFinishedBooks().lean();
-  // //get user's booklist from db based on one's email
-  // try {
-  //   const toReadList = getBooksToRead(req.session.user.email)._doc;
-  //   const finishedList = await getFinishedBooks(req.session.user.email).lean();
-  //   //? how to convert mongoose document to an array of JSON objects
-  //   Promise.resolve();
-  // } catch (error) {
-  //   Promise.reject(error);
-  // }
+  const toReadList = await getBooksToRead();
+  const finishedList = await getFinishedBooks();
+  //? if do not 'await', then pug would not render successfully because of null values...
 
   res.render('home', {
     user: req.session.user.name,
@@ -102,6 +92,16 @@ app.post('/home/api/books/new', (req, res) => {
   const { bookTitle } = req.body;
   addBookToRead(bookTitle);
   res.send('new book created!');
+});
+
+//change book category
+app.post('/home/api/books/change/:id', async (req, res) => {
+  try {
+    changeBookCategory(req.params.id);
+    Promise.resolve();
+  } catch (error) {
+    Promise.reject(error);
+  }
 });
 
 app
