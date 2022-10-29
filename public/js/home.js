@@ -79,14 +79,10 @@ booksContainer.addEventListener('click', function (e) {
   }
 });
 
-function sendNewBookTitle() {
-  //send the title through a XMLHttp post request
-}
-
 //add a new book to the booklist
-newbookTitle.addEventListener('keydown', (e) => {
+newbookTitle.addEventListener('keydown', async (e) => {
   if (e.key === 'Enter') {
-    let title = e.target.value;
+    var title = e.target.value;
     let booklist = document.createElement('li');
     booklist.classList.add('to-read');
     booklist.innerHTML = `
@@ -102,8 +98,21 @@ newbookTitle.addEventListener('keydown', (e) => {
     booksContainer.children[1].appendChild(booklist);
     e.target.value = '';
 
-    //send title with AJAX
-    sendNewBookTitle();
+    //using fetchAPI to post the new book title to backend API
+    try {
+      const response = await fetch('/home/api/books/new', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          bookTitle: title,
+        }),
+      });
+      console.log('Completed!', response);
+    } catch (err) {
+      console.error(`Error: ${err}`);
+    }
   }
 });
 

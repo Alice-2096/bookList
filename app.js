@@ -14,6 +14,7 @@ import protectRoute from './utils/protectRoute.js';
 import connectToDb from './db/index.js';
 import { signUp } from './controllers/user.js';
 import { logIn } from './controllers/user.js';
+import { findUser } from './controllers/user.js';
 import { getBooksToRead } from './controllers/book.js';
 import { getFinishedBooks } from './controllers/book.js';
 import { addBookToRead } from './controllers/book.js';
@@ -73,8 +74,8 @@ app.get('/', (req, res) =>
 // ! fix this part
 
 app.get('/home', protectRoute(), async (req, res) => {
-  var toReadList = [],
-    finishedList = [];
+  var toReadList = getBooksToRead().lean(),
+    finishedList = getFinishedBooks().lean();
   // //get user's booklist from db based on one's email
   // try {
   //   const toReadList = getBooksToRead(req.session.user.email)._doc;
@@ -97,8 +98,10 @@ app.get('/home', protectRoute(), async (req, res) => {
 });
 
 //update db when adding a new book
-app.post('/home', (req, res) => {
-  //AJAX -- receive data from /home and update DB
+app.post('/home/api/books/new', (req, res) => {
+  const { bookTitle } = req.body;
+  addBookToRead(bookTitle);
+  res.send('new book created!');
 });
 
 app

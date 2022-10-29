@@ -22,3 +22,13 @@ export const logIn = async ({ name, password }) => {
   }
   //the resulting promise will fail if any one of the try-conditions fails
 };
+
+//return a user based on email address
+export const findUser = async (email) => {
+  try {
+    const user = await User.findOne({ email });
+    return Promise.resolve(user);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};

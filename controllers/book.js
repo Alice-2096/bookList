@@ -1,7 +1,9 @@
 import Book from '../models/book.js';
 
-export const getBooksToRead = (email) => {
-  return Book.find({ finishedReading: false }).populate('user', 'name _id');
+export const getBooksToRead = () => {
+  return (
+    Book.find({ finishedReading: false }).populate('user', 'name _id') ?? []
+  );
   //! need to fix this logic
 
   //fetch all the to-read-books based on Book's reference to the User model -- specifically the user's email address
@@ -10,12 +12,14 @@ export const getBooksToRead = (email) => {
 };
 
 export const getFinishedBooks = (email) => {
-  return Book.find({ finishedReading: true }).populate('user');
+  return (
+    Book.find({ finishedReading: true }).populate('user', 'name _id') ?? []
+  );
   //! need to fix this logic
 };
 
-export const addBookToRead = ({ title, user }) => {
-  return Book.create({ title, user });
+export const addBookToRead = (title) => {
+  return Book.create({ title: title });
 };
 
 export const deleteBook = (id) => {
