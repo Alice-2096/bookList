@@ -30,8 +30,8 @@ export const getFinishedBooks = (email) => {
   // ]);
 };
 
-export const addBookToRead = (title, user, id) => {
-  return Book.create({ title: title, user: user, dataId: id });
+export const addBookToRead = (title, user) => {
+  return Book.create({ title: title, user: user });
 };
 
 export const deleteBook = (id) => {
@@ -39,6 +39,6 @@ export const deleteBook = (id) => {
 };
 
 export const changeBookCategory = (id) => {
-  const book = Book.findOne({ dataId: id });
+  const book = Book.findOne({ id });
   book.changeCategory();
 };
