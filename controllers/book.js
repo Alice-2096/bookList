@@ -38,7 +38,9 @@ export const deleteBook = (id) => {
   return Book.findByIdAndDelete(id);
 };
 
+//Toggle book as to-read or finished-reading
 export const changeBookCategory = (id) => {
-  const book = Book.findOne({ id });
-  book.changeCategory();
+  Book.findByIdAndUpdate(id, [
+    { $set: { finishedReading: { $not: '$finishedReading' } } },
+  ]);
 };

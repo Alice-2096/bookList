@@ -61,11 +61,10 @@ booksContainer.addEventListener('click', async function (e) {
       e.target.parentNode.parentNode.children[1].children[0].innerHTML;
     const booktitle =
       e.target.parentNode.parentNode.children[0].children[1].innerHTML;
-    const id = 0; //const id = event.target.dataset.id;
-    // !FIX THIS
+    const id = e.target.parentNode.parentNode.dataset.id;
 
     let bookContent = document.createElement('li');
-    //!add dataId to li
+    bookContent.setAttribute('data-id', id);
     bookContent.classList.add('finished');
     bookContent.innerHTML = `
     <div class="book-title-bar">
@@ -80,10 +79,9 @@ booksContainer.addEventListener('click', async function (e) {
     e.target.parentNode.parentNode.remove();
     completedContainer.children[1].appendChild(bookContent);
 
-    //AJAX POST
+    //AJAX POST -- update DB
     try {
-      const bookId = id;
-      const response = await fetch(`/home/api/books/change/${bookId}`, {
+      const response = await fetch(`/home/api/books/change/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

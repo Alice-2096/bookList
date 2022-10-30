@@ -100,10 +100,10 @@ app.post('/home/api/books/new', async (req, res) => {
   }
 });
 
-//change book category
-app.post('/home/api/books/change/:bookId?', async (req, res) => {
+//changing book category handler
+app.post('/home/api/books/change/id', async (req, res) => {
   try {
-    const bookId = req.params.bookId;
+    const bookId = req.params.id;
     changeBookCategory(bookId);
     Promise.resolve();
   } catch (error) {
