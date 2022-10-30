@@ -12,7 +12,6 @@ const bookSchema = new Schema({
   //cross-reference will allow us to dynamically populate this user field with data from the user collection in a single query
   finishedReading: { type: Boolean, default: false },
   createdAt: { type: Date, default: new Date() },
-  dataId: { type: String, default: '' },
 });
 
 bookSchema.methods.changeCategory = async function () {
