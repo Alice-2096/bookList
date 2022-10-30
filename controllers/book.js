@@ -1,25 +1,37 @@
 import Book from '../models/book.js';
 
-export const getBooksToRead = () => {
+// !buggy
+export const getBooksToRead = (email) => {
   return (
     Book.find({ finishedReading: false }).populate('user', 'name _id') ?? []
   );
-  //! need to fix this logic
-
-  //fetch all the to-read-books based on Book's reference to the User model -- specifically the user's email address
-
-  // Book.findById(id) ??
 };
 
+// !buggy
 export const getFinishedBooks = (email) => {
   return (
     Book.find({ finishedReading: true }).populate('user', 'name _id') ?? []
   );
-  //! need to fix this logic
+  // return Book.aggregate([
+  //   { $unwind: '$users' },
+  //   {
+  //     $lookup: {
+  //       from: 'user',
+  //       localField: 'users',
+  //       foreignField: '_id',
+  //       as: 'user',
+  //     },
+  //   },
+  //   {
+  //     $match: {
+  //       'user.email': email,
+  //     },
+  //   },
+  // ]);
 };
 
-export const addBookToRead = (title, user) => {
-  return Book.create({ title: title, user: user });
+export const addBookToRead = (title, user, id) => {
+  return Book.create({ title: title, user: user, dataId: id });
 };
 
 export const deleteBook = (id) => {
@@ -27,6 +39,6 @@ export const deleteBook = (id) => {
 };
 
 export const changeBookCategory = (id) => {
-  const book = Book.findOne({ id });
+  const book = Book.findOne({ dataId: id });
   book.changeCategory();
 };

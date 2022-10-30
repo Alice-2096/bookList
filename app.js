@@ -72,8 +72,8 @@ app.get('/', (req, res) =>
 );
 
 app.get('/home', protectRoute(), async (req, res) => {
-  const toReadList = await getBooksToRead();
-  const finishedList = await getFinishedBooks();
+  const toReadList = await getBooksToRead(req.session.user.email);
+  const finishedList = await getFinishedBooks(req.session.user.email);
   //? if do not 'await', then pug would not render successfully because of null values...
 
   res.render('home', {
@@ -89,16 +89,17 @@ app.get('/home', protectRoute(), async (req, res) => {
 
 //update db when adding a new book along with user info
 app.post('/home/api/books/new', async (req, res) => {
-  const { bookTitle } = req.body;
+  const { bookTitle, dataId } = req.body;
   const user = await findUser(req.session.user.email);
-  addBookToRead(bookTitle, user);
+  addBookToRead(bookTitle, user, dataId);
   res.send('new book created!');
 });
 
 //change book category
-app.post('/home/api/books/change/:id', async (req, res) => {
+app.post('/home/api/books/change/:bookId?', async (req, res) => {
   try {
-    changeBookCategory(req.params.id);
+    const bookId = req.params.bookId;
+    changeBookCategory(bookId);
     Promise.resolve();
   } catch (error) {
     Promise.reject(error);
