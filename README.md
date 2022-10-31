@@ -9,17 +9,25 @@ MySQL or MongoDB will be used to interact with the database.
 ## Demo
 
 - ### Homepage
+
 ![homepage-demo](/demo/homepage.gif)
 
 - ### SignIn, SignUp and SignOut
+
 ![sign-in-demo](/demo/login_signup.gif)
 
-- ### Booklist Features: Add, Delete, Change Category, and Edit. 
+- ### Booklist Features: Add a New Book & Toggle To-Read List
+
+![sign-in-demo](/demo/toggle_add_book.gif)
+
+- ### Booklist Features: Edit Book Title or Content & Deleting from the Booklist
+
+Content To-be-inserted.
 
 ## Workflow
 
-- [ ] EDIT and DELETE functionality -- FrontEnd and BackEnd logic to be added 
-- [ ] fix DB logic on /home  
-- [ ] Modular Routing 
+- [ ] EDIT and DELETE functionality -- FrontEnd and BackEnd logic to be added
+- [x] fix DB logic on /home  
+- [ ] Modular Routing
 - [ ] Unit Testing using Jest or Cypress
 - [ ] deploy the application on Heroku when all tasks are complete :tada:

@@ -103,8 +103,6 @@ app.post('/home/api/books/new', async (req, res) => {
 app.post('/home/api/books/:id', async (req, res) => {
   try {
     const bookId = req.params.id;
-    console.log('🚀 ~ file: app.js ~ line 106 ~ app.post ~ bookId', bookId);
-
     changeBookCategory(bookId);
   } catch (error) {
     console.log(error);
