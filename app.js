@@ -1,25 +1,14 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import { join } from 'path';
 import session from 'express-session';
 import compression from 'compression';
 import morgan from 'morgan';
-import moment from 'moment';
-import home from './routes/home/home.js';
-import login_page from './routes/home/login_page.js';
-import { get } from 'http';
-import protectRoute from './utils/protectRoute.js';
 import connectToDb from './db/index.js';
-import { signUp } from './controllers/user.js';
-import { logIn } from './controllers/user.js';
-import { findUser } from './controllers/user.js';
-import { getBooksToRead } from './controllers/book.js';
-import { getFinishedBooks } from './controllers/book.js';
-import { addBookToRead } from './controllers/book.js';
-import { deleteBook } from './controllers/book.js';
-import { changeBookCategory } from './controllers/book.js';
+//route handlers
+import home from './routes/home';
+import bookAPI from './routes/api';
 
 const app = express(); //give us access to express methods
 const __filename = fileURLToPath(import.meta.url);
@@ -66,89 +55,6 @@ app.use(
   })
 );
 
-//GET
-app.get('/', (req, res) =>
-  req.session.user ? res.redirect('/home') : res.redirect('/login')
-);
-
-app.get('/home', protectRoute(), async (req, res) => {
-  const toReadList = await getBooksToRead(req.session.user.email);
-  const finishedList = await getFinishedBooks(req.session.user.email);
-
-  res.render('home', {
-    user: req.session.user.name,
-    lastLoggedIn: moment(req.session.user.lastLoggedIn).format(
-      'MMMM, Do YYYY, h:mm:ss a'
-    ),
-    email: req.session.user.email,
-    booklist: toReadList,
-    finishedBooklist: finishedList,
-  });
-});
-
-//update db when adding a new book along with user info
-app.post('/home/api/books/new', async (req, res) => {
-  try {
-    const { bookTitle } = req.body;
-    const user = await findUser(req.session.user.email);
-    const newbook = await addBookToRead(bookTitle, user);
-    res.send(newbook._id);
-    Promise.resolve(newbook._id);
-  } catch (error) {
-    Promise.reject(error);
-  }
-});
-
-//changing book category handler
-app.post('/home/api/books/:id', async (req, res) => {
-  try {
-    const bookId = req.params.id;
-    changeBookCategory(bookId);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-app
-  .route('/login')
-  .get((req, res) => {
-    res.sendFile(join(__dirname, 'views', 'login.html'));
-  })
-  .post(async (req, res) => {
-    try {
-      const { name, password } = req.body;
-      const user = await logIn({ name, password }); //function param names need to match!
-      req.session.user = {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        lastLoggedIn: user.lastLoggedIn,
-      };
-      return res.redirect('/home');
-    } catch (error) {
-      console.log(error);
-      res.redirect('/login');
-    }
-  });
-
-app.get('/home/logout', (req, res) => {
-  //delete user session data when he logs out
-  delete req.session.user;
-  res.redirect('/login');
-});
-
-app
-  .route('/signup')
-  .get((req, res) => {
-    res.sendFile(join(__dirname, 'views', 'register.html'));
-  })
-  .post(async (req, res) => {
-    try {
-      const { name, email, password } = req.body;
-      await signUp({ name, email, password });
-      return res.redirect('/login');
-    } catch (error) {
-      console.log(error);
-      res.redirect('/signup');
-    }
-  });
+//Mounting route handlers
+app.use('/', home);
+app.use('/home/api/books', bookAPI);
