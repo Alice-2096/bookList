@@ -7,8 +7,8 @@ import compression from 'compression';
 import morgan from 'morgan';
 import connectToDb from './db/index.js';
 //route handlers
-import home from './routes/home';
-import bookAPI from './routes/api';
+import home from './routes/home/index.js';
+import bookAPI from './routes/api/index.js';
 
 const app = express(); //give us access to express methods
 const __filename = fileURLToPath(import.meta.url);

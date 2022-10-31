@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import newBook from './newBook';
-import toggle from './toggle';
+import newBook from './newBook.js';
+import toggle from './toggle.js';
 const router = Router();
 
 //update db when adding a new book along with user info

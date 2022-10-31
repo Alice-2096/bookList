@@ -1,9 +1,6 @@
 import { Router } from 'express';
 import home from './home.js';
 import protectRoute from '../../utils/protectRoute.js';
-import path from 'path';
-import { dirname } from 'path';
-import { join } from 'path';
 import login from './login.js';
 import signup from './signup.js';
 import logout from './logout.js';
@@ -22,7 +19,7 @@ router.get('/home', protectRoute(), home);
 router
   .route('/login')
   .get((req, res) => {
-    res.sendFile(join(__dirname, 'views', 'login.html'));
+    res.sendFile('/Users/apple/Documents/bookList/views/login.html');
   })
   .post(login);
 
@@ -30,7 +27,7 @@ router
 router
   .route('/signup')
   .get((req, res) => {
-    res.sendFile(join(__dirname, 'views', 'register.html'));
+    res.sendFile('/Users/apple/Documents/bookList/views/register.html');
   })
   .post(signup);
 
