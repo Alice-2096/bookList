@@ -1,5 +1,5 @@
 each book in finishedBooklist
-    li.finished 
+    li.finished(data-id = book._id)
         .book-title-bar
             button.book-toggle-btn
             h4.book-title=book.title 

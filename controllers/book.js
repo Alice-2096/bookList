@@ -56,10 +56,8 @@ export const deleteBook = (id) => {
 };
 
 //Toggle book as to-read or finished-reading
-export const changeBookCategory = (id) => {
-  console.log('🚀 ~ file: book.js ~ line 60 ~ changeBookCategory ~ id', id);
-
-  Book.findByIdAndUpdate(id, [
-    { $set: { finishedReading: { $not: '$finishedReading' } } },
-  ]);
+export const changeBookCategory = async (id) => {
+  const book = await Book.findById(id); // find
+  book.changeCategory(); // change category
+  book.save(); // save changes to DB
 };

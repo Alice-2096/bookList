@@ -24,18 +24,21 @@ completedContainer.addEventListener('click', function (e) {
 });
 
 //book toggle button: finished --> to read
-completedContainer.addEventListener('click', function (e) {
+completedContainer.addEventListener('click', async function (e) {
   if (
     e.target.classList.contains('book-toggle-btn') &&
     e.target.parentNode.parentNode.classList.contains('finished')
   ) {
-    var content =
+    const content =
       e.target.parentNode.parentNode.children[1].children[0].innerHTML;
-    var booktitle =
+    const booktitle =
       e.target.parentNode.parentNode.children[0].children[1].innerHTML;
+    const id = e.target.parentNode.parentNode.dataset.id;
+
     //create a new li element and fill in content
-    let bookContent = document.createElement('li');
+    const bookContent = document.createElement('li');
     bookContent.classList.add('to-read');
+    bookContent.setAttribute('data-id', id);
     bookContent.innerHTML = `
     <div class="book-title-bar">
         <button class="book-toggle-btn"></button>
@@ -48,6 +51,16 @@ completedContainer.addEventListener('click', function (e) {
     //remove the current li and add new li
     e.target.parentNode.parentNode.remove();
     booksContainer.children[1].appendChild(bookContent);
+
+    //AJAX POST -- update DB
+    const response = await fetch('/home/api/books/' + id, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   }
 });
 
@@ -62,7 +75,6 @@ booksContainer.addEventListener('click', async function (e) {
     const booktitle =
       e.target.parentNode.parentNode.children[0].children[1].innerHTML;
     const id = e.target.parentNode.parentNode.dataset.id;
-    console.log('🚀 ~ file: home.js ~ line 65 ~ id', id);
 
     let bookContent = document.createElement('li');
     bookContent.setAttribute('data-id', id);
@@ -81,17 +93,14 @@ booksContainer.addEventListener('click', async function (e) {
     completedContainer.children[1].appendChild(bookContent);
 
     //AJAX POST -- update DB
-
-    try {
-      const response = await fetch('/home/api/books/' + id, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-    } catch (err) {
-      console.error(`Error: ${err}`);
-    }
+    const response = await fetch('/home/api/books/' + id, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   }
 });
 
@@ -112,7 +121,7 @@ newbookTitle.addEventListener('keydown', async (e) => {
         bookTitle: title,
       }),
     })
-      .then((response) => response.json())
+      .then((response) => response.json()) //parse response and return the parsed response to the next function
       .then((data) => {
         const id = data;
         console.log('🚀 ~ file: home.js ~ line 118 ~ .then ~ id', id);
