@@ -27,7 +27,7 @@ Content To-be-inserted.
 ## Workflow
 
 - [ ] EDIT and DELETE functionality -- FrontEnd and BackEnd logic to be added
-- [x] fix DB logic on /home  
-- [ ] Modular Routing
+- [ ] fix DB logic on /home -- find() + aggregate() 
+- [ ] Modular Routing 
 - [ ] Unit Testing using Jest or Cypress
 - [ ] deploy the application on Heroku when all tasks are complete :tada:
