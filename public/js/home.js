@@ -9,7 +9,7 @@ const logoutBtn = document.getElementById('logout');
 
 //header -- logout button -- redirect to the log out page onclick
 logoutBtn.addEventListener('click', function () {
-  location.href = './home/logout';
+  location.href = './logout';
 });
 
 //modal dropdown window
