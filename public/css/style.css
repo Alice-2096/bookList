@@ -173,14 +173,15 @@ body > *  {
     display: none;
 }
 .edit-and-delete-container {
-    text-align:right;
+    height: 24px;
+    text-align: end;
 }
-.edit, .save-button {
+.edit, .save-button, .cancel-button {
     fill:#8ba94c;
 }
-.delete, .cancel-button {
+.delete  {
     margin-right: 20px;
-    margin-left: 3px;
+    margin-left: 4px;
     fill: #8ba94c;
 }
 .save-button, .cancel-button {
@@ -196,6 +197,12 @@ body > *  {
 }
 .save-button.editing-mode, .cancel-button.editing-mode {
     display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+.cancel-button.editing-mode {
+    margin-right: 20px;
+    margin-left: 4px;
 }
 
 /* footer */
