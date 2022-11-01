@@ -175,17 +175,27 @@ body > *  {
 .edit-and-delete-container {
     text-align:right;
 }
-#edit {
+.edit, .save-button {
     fill:#8ba94c;
 }
-#delete {
+.delete, .cancel-button {
     margin-right: 20px;
     margin-left: 3px;
     fill: #8ba94c;
 }
-#delete:hover, #edit:hover {
+.save-button, .cancel-button {
+    display: none;
+}
+.delete:hover, .edit:hover, .save-button:hover, .cancel-button:hover {
     cursor: pointer;
     fill: #4E5F29;
+}
+/*editing mode*/
+.delete.editing-mode, .edit.editing-mode {
+    display: none;
+}
+.save-button.editing-mode, .cancel-button.editing-mode {
+    display: inline-block;
 }
 
 /* footer */
