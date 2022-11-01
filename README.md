@@ -22,11 +22,12 @@ MySQL or MongoDB will be used to interact with the database.
 
 - ### Booklist Features: Edit Book Title or Content & Deleting from the Booklist
 
-Content To-be-inserted.
+![sign-in-demo](/demo/edit_delete.gif)
 
 ## Workflow
 
-- [ ] EDIT functionality -- FrontEnd and BackEnd logic to be added
+- [x] EDIT functionality -- FrontEnd and BackEnd logic to be added
+- [ ] Set To-read booklist priority by clicking on the 'star' button
 - [ ] fix DB logic on /home -- find() + aggregate()
 - [x] Modular Routing
 - [ ] Unit Testing using Jest or Cypress
