@@ -238,6 +238,7 @@ mainContainer.addEventListener('click', async (e) => {
     const content = e.target.parentNode.previousElementSibling;
     const title =
       e.target.parentNode.parentNode.previousElementSibling.children[1];
+    const id = e.target.parentNode.parentNode.parentNode.dataset.id;
 
     //exit the editing mode
     content.contentEditable = false;
@@ -253,17 +254,15 @@ mainContainer.addEventListener('click', async (e) => {
     e.target.classList.remove('editing-mode');
 
     //send data to server
-    const id = e.target.parentNode.parentNode.parentNode.dataset.id;
-
     const response = await fetch('/home/api/books/' + id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(
-        { bookTitle: title.innerText },
-        { bookContent: content.innerText }
-      ),
+      body: JSON.stringify({
+        bookTitle: title.innerText,
+        bookContent: content.innerText,
+      }),
     }).catch((error) => console.log(error));
   }
 });

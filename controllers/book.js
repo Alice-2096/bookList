@@ -46,7 +46,7 @@ export const getFinishedBooks = (email) => {
 };
 
 export const addBookToRead = (title, user) => {
-  return Book.create({ title: title, user: user });
+  return Book.create({ title: title, user: user, content: '' });
 };
 
 export const deleteBook = async (id) => {
@@ -65,5 +65,9 @@ export const updateBook = async (id, title, content) => {
   const book = await Book.findById(id);
   book.title = title;
   book.content = content;
+  console.log(
+    '🚀 ~ file: book.js ~ line 70 ~ updateBook ~ book.content',
+    book.content
+  );
   book.save();
 };
