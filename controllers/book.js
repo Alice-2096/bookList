@@ -1,20 +1,18 @@
 import Book from '../models/book.js';
-import User from '../models/user.js';
 
 // !buggy
 export const getBooksToRead = (email) => {
   return (
     Book.find({ finishedReading: false }).populate('user', 'name _id') ?? []
   );
-
   // return Book.aggregate([
   //   { $unwind: '$user' },
   //   {
   //     $lookup: {
-  //       from: 'user',
+  //       from: 'User',
   //       localField: 'user',
   //       foreignField: '_id',
-  //       as: 'user',
+  //       as: 'users',
   //     },
   //   },
   //   {
