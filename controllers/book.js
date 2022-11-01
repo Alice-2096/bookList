@@ -49,8 +49,8 @@ export const addBookToRead = (title, user) => {
   return Book.create({ title: title, user: user });
 };
 
-export const deleteBook = (id) => {
-  return Book.findByIdAndDelete(id);
+export const deleteBook = async (id) => {
+  return Book.deleteOne({ _id: id });
 };
 
 //Toggle book as to-read or finished-reading

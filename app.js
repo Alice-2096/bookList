@@ -49,7 +49,7 @@ app.use(
     //secrete is used to encrypt the session cookie so that you can be reasonably sure the cookie isn't a fake one
     cookie: {
       httpOnly: true,
-      maxAge: 18000000, //duration of cookie
+      maxAge: 18000000000, //duration of cookie
       secure: app.get('env') === 'production' ? true : false, //true -- cookie can be read during secure HTTP connection
     },
   })
