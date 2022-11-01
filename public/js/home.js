@@ -6,6 +6,8 @@ const titleBar = document.querySelector('.book-title-bar');
 const btn = document.querySelector('.book-toggle-btn');
 const newbookTitle = document.getElementById('newbook-title');
 const logoutBtn = document.getElementById('logout');
+const deleteBtn = document.getElementById('delete');
+const editBtn = document.getElementById('edit');
 
 //header -- logout button -- redirect to the log out page onclick
 logoutBtn.addEventListener('click', function () {

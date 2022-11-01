@@ -146,9 +146,12 @@ body > *  {
     width: 20px;
     position: absolute;
     right: 60px;
+    fill: #8ba94c;
 }
 .main-container .star-btn:hover {
     animation: rotate-star 1s;
+    fill:#4E5F29;
+    stroke: #96ad64;
 }
 @keyframes rotate-star {
     0% {
@@ -169,6 +172,22 @@ body > *  {
 .book-desc-hidden {
     display: none;
 }
+.edit-and-delete-container {
+    text-align:right;
+}
+#edit {
+    fill:#8ba94c;
+}
+#delete {
+    margin-right: 20px;
+    margin-left: 3px;
+    fill: #8ba94c;
+}
+#delete:hover, #edit:hover {
+    cursor: pointer;
+    fill: #4E5F29;
+}
+
 /* footer */
 .footer {
     text-align: center;
