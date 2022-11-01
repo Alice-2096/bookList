@@ -59,3 +59,11 @@ export const changeBookCategory = async (id) => {
   book.changeCategory(); // change category
   book.save(); // save changes to DB
 };
+
+//update book title and description
+export const updateBook = async (id, title, content) => {
+  const book = await Book.findById(id);
+  book.title = title;
+  book.content = content;
+  book.save();
+};
