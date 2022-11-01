@@ -1,9 +1,13 @@
 const dateFooter = document.getElementById('date');
 const date = new Date();
+const mainContainer = document.querySelector('.main-container');
 const booksContainer = document.querySelector('.books-to-read');
 const completedContainer = document.querySelector('.completed');
 const newbookTitle = document.getElementById('newbook-title');
 const logoutBtn = document.getElementById('logout');
+
+var oldTitle = '';
+var oldContent = '';
 
 //header -- logout button -- redirect to the log out page onclick
 logoutBtn.addEventListener('click', function () {
@@ -11,15 +15,7 @@ logoutBtn.addEventListener('click', function () {
 });
 
 //modal dropdown window
-booksContainer.addEventListener('click', function (e) {
-  if (
-    e.target.classList.contains('book-title') &&
-    !e.target.classList.contains('editing-mode')
-  )
-    e.target.parentNode.nextElementSibling.classList.toggle('book-desc-hidden');
-});
-
-completedContainer.addEventListener('click', function (e) {
+mainContainer.addEventListener('click', function (e) {
   if (
     e.target.classList.contains('book-title') &&
     !e.target.classList.contains('editing-mode')
@@ -212,7 +208,7 @@ newbookTitle.addEventListener('keydown', async (e) => {
 });
 
 //edit a book
-booksContainer.addEventListener('click', (e) => {
+mainContainer.addEventListener('click', (e) => {
   if (e.target.classList.contains('edit')) {
     //enter into the editing mode
     const saveBtn = e.target.previousElementSibling.previousElementSibling;
@@ -226,13 +222,64 @@ booksContainer.addEventListener('click', (e) => {
     const desc = e.target.parentNode.previousElementSibling;
     const title =
       e.target.parentNode.parentNode.previousElementSibling.children[1];
+    //store old values in case the user wants to revert the change
+    oldContent = desc.innerText;
+    oldTitle = title.innerText;
+
     desc.contentEditable = true;
     title.contentEditable = true;
     title.classList.add('editing-mode');
   }
 });
 
-//Save or Cancel the edited text
+//Save the edited text
+mainContainer.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('save-button')) {
+    const content = e.target.parentNode.previousElementSibling;
+    const title =
+      e.target.parentNode.parentNode.previousElementSibling.children[1];
+
+    //exit the editing mode
+    content.contentEditable = false;
+    title.contentEditable = false;
+    title.classList.remove('editing-mode');
+    e.target.nextElementSibling.classList.remove('editing-mode');
+    e.target.nextElementSibling.nextElementSibling.classList.remove(
+      'editing-mode'
+    );
+    e.target.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove(
+      'editing-mode'
+    );
+    e.target.classList.remove('editing-mode');
+
+    //send the data to server
+    console.log(content.innerText);
+    console.log(title.innerText);
+  }
+});
+
+//Cancel any changes made to the text
+mainContainer.addEventListener('click', (e) => {
+  if (e.target.classList.contains('cancel-button')) {
+    const content = e.target.parentNode.previousElementSibling;
+    const title =
+      e.target.parentNode.parentNode.previousElementSibling.children[1];
+    //exit the editing mode
+
+    content.contentEditable = false;
+    title.contentEditable = false;
+    title.classList.remove('editing-mode');
+    e.target.nextElementSibling.classList.remove('editing-mode');
+    e.target.nextElementSibling.nextElementSibling.classList.remove(
+      'editing-mode'
+    );
+    e.target.previousElementSibling.classList.remove('editing-mode');
+    e.target.classList.remove('editing-mode');
+    //display old content
+    content.innerText = oldContent;
+    title.innerText = oldTitle;
+  }
+});
 
 // footer
 window.addEventListener(
