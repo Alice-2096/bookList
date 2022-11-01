@@ -65,9 +65,5 @@ export const updateBook = async (id, title, content) => {
   const book = await Book.findById(id);
   book.title = title;
   book.content = content;
-  console.log(
-    '🚀 ~ file: book.js ~ line 70 ~ updateBook ~ book.content',
-    book.content
-  );
   book.save();
 };
