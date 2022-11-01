@@ -1,14 +1,9 @@
 const dateFooter = document.getElementById('date');
 const date = new Date();
 const booksContainer = document.querySelector('.books-to-read');
-const mainContainer = document.querySelector('.main-container');
 const completedContainer = document.querySelector('.completed');
-const titleBar = document.querySelector('.book-title-bar');
-const btn = document.querySelector('.book-toggle-btn');
 const newbookTitle = document.getElementById('newbook-title');
 const logoutBtn = document.getElementById('logout');
-const deleteBtn = document.getElementById('delete');
-const editBtn = document.getElementById('edit');
 
 //header -- logout button -- redirect to the log out page onclick
 logoutBtn.addEventListener('click', function () {
@@ -17,12 +12,18 @@ logoutBtn.addEventListener('click', function () {
 
 //modal dropdown window
 booksContainer.addEventListener('click', function (e) {
-  if (e.target.classList.contains('book-title'))
+  if (
+    e.target.classList.contains('book-title') &&
+    !e.target.classList.contains('editing-mode')
+  )
     e.target.parentNode.nextElementSibling.classList.toggle('book-desc-hidden');
 });
 
 completedContainer.addEventListener('click', function (e) {
-  if (e.target.classList.contains('book-title'))
+  if (
+    e.target.classList.contains('book-title') &&
+    !e.target.classList.contains('editing-mode')
+  )
     e.target.parentNode.nextElementSibling.classList.toggle('book-desc-hidden');
 });
 
@@ -211,18 +212,27 @@ newbookTitle.addEventListener('keydown', async (e) => {
 });
 
 //edit a book
-editBtn.addEventListener('click', async (e) => {
-  if (e.target.id == 'edit') {
-    /**start editing:
-     * 1. display modal window with the selected book title and content at the center of the page
-     * 2. user action (write, edit, delete, etc.)
-     * 3. SAVE or CANCEL any changes made
-     * 4. update DB
-     * 5. close the modal window
-     * 6. update user interface
-     */
+booksContainer.addEventListener('click', (e) => {
+  if (e.target.classList.contains('edit')) {
+    //enter into the editing mode
+    const saveBtn = e.target.previousElementSibling.previousElementSibling;
+    const cancelBtn = e.target.previousElementSibling;
+    //1. show buttons
+    e.target.classList.add('editing-mode');
+    e.target.nextElementSibling.classList.add('editing-mode');
+    cancelBtn.classList.add('editing-mode');
+    saveBtn.classList.add('editing-mode');
+    //2. make text area editable
+    const desc = e.target.parentNode.previousElementSibling;
+    const title =
+      e.target.parentNode.parentNode.previousElementSibling.children[1];
+    desc.contentEditable = true;
+    title.contentEditable = true;
+    title.classList.add('editing-mode');
   }
 });
+
+//Save or Cancel the edited text
 
 // footer
 window.addEventListener(
