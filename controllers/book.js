@@ -1,6 +1,12 @@
 import Book from '../models/book.js';
 
-// ? I filtered data both on server and client side. This might not be the most efficient way, though. Can Mongoose do all the work?
+//sort by priority
+// !this does not seem to work...but sorting on server will take care of the problem
+export const sortByPriority = async () => {
+  Book.find().sort({ priority: -1 });
+};
+
+// ? I filtered data (finishedReading, Priority) both on server and DB side. This might not be the most efficient way, though. Can Mongoose/server do all the work?
 
 export const getBooksToRead = async (email) => {
   const books = await Book.find().populate({
@@ -8,12 +14,18 @@ export const getBooksToRead = async (email) => {
     match: { email: email },
   });
 
-  let result = [];
+  let resultStar = [];
+  let resultNoStar = [];
   books.forEach(function (book) {
     if (book.finishedReading == false && book.user != null) {
-      result.push(book);
+      if (book.priority) {
+        resultStar.push(book);
+      } else {
+        resultNoStar.push(book);
+      }
     }
   });
+  let result = resultStar.concat(resultNoStar);
   return result;
 };
 
@@ -60,9 +72,4 @@ export const setBookPriority = async (id, priority) => {
   const book = await Book.findById(id);
   book.priority = priority;
   book.save();
-};
-
-//sort by priority
-export const sortByPriority = async () => {
-  return Book.find().sort({ priority: -1 });
 };
