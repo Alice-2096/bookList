@@ -28,7 +28,7 @@ MySQL or MongoDB will be used to interact with the database.
 
 - [x] EDIT functionality -- FrontEnd and BackEnd logic to be added
 - [ ] Set To-read booklist priority by clicking on the 'star' button
-- [ ] fix DB logic on /home -- find() + aggregate()
+- [x] fix DB logic on '/home'
 - [x] Modular Routing
 - [ ] Unit Testing using Jest or Cypress
 - [ ] deploy the application on Heroku when all tasks are complete :tada:
