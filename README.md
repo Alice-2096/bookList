@@ -24,11 +24,17 @@ MySQL or MongoDB will be used to interact with the database.
 
 ![sign-in-demo](/demo/edit_delete.gif)
 
+- ### Booklist Feature: Set Book Priority by toggling the 'Star' :star:
+
+![sign-in-demo](/demo/star_toggle.gif)
+
 ## Workflow
 
 - [x] EDIT functionality -- FrontEnd and BackEnd logic to be added
-- [ ] Set To-read booklist priority by clicking on the 'star' button
-- [x] fix DB logic on '/home'
+- [x] Set To-read booklist priority by clicking on the 'star' button
+- [x] fix DB and frontend logic on '/home'
+- [ ] implement search bar functionality  
+- [ ] book recommendation based on websearch 'What is Popular?/Book of the Month'
 - [x] Modular Routing
 - [ ] Unit Testing using Jest or Cypress
 - [ ] deploy the application on Heroku when all tasks are complete :tada:
