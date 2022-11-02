@@ -5,6 +5,7 @@ import moment from 'moment';
 export default async (req, res) => {
   const toReadList = await getBooksToRead(req.session.user.email);
   const finishedList = await getFinishedBooks(req.session.user.email);
+  console.log(toReadList);
 
   res.render('home', {
     user: req.session.user.name,

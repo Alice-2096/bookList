@@ -1,48 +1,35 @@
 import Book from '../models/book.js';
 
-// !buggy
-export const getBooksToRead = (email) => {
-  return (
-    Book.find({ finishedReading: false }).populate('user', 'name _id') ?? []
-  );
-  // return Book.aggregate([
-  //   { $unwind: '$user' },
-  //   {
-  //     $lookup: {
-  //       from: 'User',
-  //       localField: 'user',
-  //       foreignField: '_id',
-  //       as: 'users',
-  //     },
-  //   },
-  //   {
-  //     $match: { 'user.email': email },
-  //   },
-  // ]);
+// ? I filtered data both on server and client side. This might not be the most efficient way, though. Can Mongoose do all the work?
+
+export const getBooksToRead = async (email) => {
+  const books = await Book.find().populate({
+    path: 'user',
+    match: { email: email },
+  });
+
+  let result = [];
+  books.forEach(function (book) {
+    if (book.finishedReading == false && book.user != null) {
+      result.push(book);
+    }
+  });
+  return result;
 };
 
-// !buggy
-export const getFinishedBooks = (email) => {
-  return (
-    Book.find({ finishedReading: true }).populate('user', 'name _id') ?? []
-  );
-  //   return Book.aggregate([
-  //     { $unwind: '$user' },
-  //     {
-  //       $lookup: {
-  //         from: 'user',
-  //         localField: 'user',
-  //         foreignField: '_id',
-  //         as: 'user',
-  //       },
-  //     },
-  //     {
-  //       $match: {
-  //         'user.email': email,
-  //         finishedReading: true,
-  //       },
-  //     },
-  //   ]);
+export const getFinishedBooks = async (email) => {
+  const books = await Book.find().populate({
+    path: 'user',
+    match: { email: email },
+  });
+
+  let result = [];
+  books.forEach(function (book) {
+    if (book.finishedReading == true && book.user != null) {
+      result.push(book);
+    }
+  });
+  return result;
 };
 
 export const addBookToRead = (title, user) => {
