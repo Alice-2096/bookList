@@ -152,6 +152,9 @@ body > *  {
     animation: rotate-star 1s;
     fill:#283115;
 }
+.star-btn.priority {
+    fill: #283115;
+}
 @keyframes rotate-star {
     0% {
         rotate: 0deg;

@@ -290,6 +290,41 @@ mainContainer.addEventListener('click', (e) => {
   }
 });
 
+//set priority for to-read books
+booksContainer.addEventListener('click', async (e) => {
+  if (
+    e.target.classList.contains('star-btn') &&
+    !e.target.previousElementSibling.classList.contains('editing-mode')
+  ) {
+    e.target.classList.toggle('priority');
+    const important = e.target.classList.contains('priority') ? true : false;
+    //adjust target position if ul contains more than one li
+    const booklist = e.target.parentNode.parentNode.parentNode;
+    const id = booklist.dataset.id;
+    if (booklist.childElementCount > 1) {
+      const book = e.target.parentNode.parentNode;
+      const clone = book.cloneNode(true);
+      if (important) {
+        booklist.prepend(book);
+      } else {
+        booklist.append(book);
+      }
+      book.remove();
+    }
+
+    //send PUT request to server
+    const response = await fetch('/home/api/books/priority' + id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        priority: important,
+      }),
+    }).catch((error) => console.log(error));
+  }
+});
+
 // footer
 window.addEventListener(
   'load',
