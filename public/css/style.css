@@ -142,16 +142,15 @@ body > *  {
 .main-container .book-title {
     width: 100%;
 }
-.main-container .star-btn {
-    width: 20px;
+.star-btn {
+    width: 24px;
     position: absolute;
     right: 60px;
-    fill: #8ba94c;
+    fill: #CDD993;
 }
-.main-container .star-btn:hover {
+.star-btn:hover {
     animation: rotate-star 1s;
-    fill:#4E5F29;
-    stroke: #96ad64;
+    fill:#283115;
 }
 @keyframes rotate-star {
     0% {
