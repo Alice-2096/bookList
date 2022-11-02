@@ -54,3 +54,10 @@ export const updateBook = async (id, title, content) => {
   book.content = content;
   book.save();
 };
+
+//setting book priority
+export const setBookPriority = async (bookId, priority) => {
+  const book = await Book.findById(id);
+  book.priority = priority;
+  book.save();
+};
