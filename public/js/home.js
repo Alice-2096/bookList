@@ -296,25 +296,30 @@ booksContainer.addEventListener('click', async (e) => {
     e.target.classList.contains('star-btn') &&
     !e.target.previousElementSibling.classList.contains('editing-mode')
   ) {
+    console.log('star clicked');
     e.target.classList.toggle('priority');
     const important = e.target.classList.contains('priority') ? true : false;
+
     //adjust target position if ul contains more than one li
-    const booklist = e.target.parentNode.parentNode.parentNode;
-    const id = booklist.dataset.id;
-    if (booklist.childElementCount > 1) {
-      const book = e.target.parentNode.parentNode;
+    const booklist = booksContainer.children[1];
+    const book = e.target.parentNode.parentNode;
+    const id = book.dataset.id;
+
+    const num = booklist.childElementCount;
+
+    if (num > 1) {
       const clone = book.cloneNode(true);
       if (important) {
-        booklist.prepend(book);
+        booklist.prepend(clone);
       } else {
-        booklist.append(book);
+        booklist.append(clone);
       }
       book.remove();
     }
 
     //send PUT request to server
-    const response = await fetch('/home/api/books/priority' + id, {
-      method: 'PUT',
+    const response = await fetch('/home/api/books/' + id, {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },

@@ -56,8 +56,13 @@ export const updateBook = async (id, title, content) => {
 };
 
 //setting book priority
-export const setBookPriority = async (bookId, priority) => {
+export const setBookPriority = async (id, priority) => {
   const book = await Book.findById(id);
   book.priority = priority;
   book.save();
+};
+
+//sort by priority
+export const sortByPriority = async () => {
+  return Book.find().sort({ priority: -1 });
 };

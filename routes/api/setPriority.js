@@ -4,7 +4,9 @@ export default async (req, res) => {
   try {
     const bookId = req.params.id;
     const { priority } = req.body;
-    setBookPriority(bookId, priority);
+
+    await setBookPriority(bookId, priority);
+    //sort books in DB
   } catch (error) {
     console.log(error);
   }
