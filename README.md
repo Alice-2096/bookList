@@ -33,7 +33,7 @@ MySQL or MongoDB will be used to interact with the database.
 - [x] EDIT functionality -- FrontEnd and BackEnd logic to be added
 - [x] Set To-read booklist priority by clicking on the 'star' button
 - [x] fix DB and frontend logic on '/home'
-- [ ] implement search bar functionality  
+- [x] implement search bar functionality  
 - [ ] book recommendation based on websearch 'What is Popular?/Book of the Month'
 - [x] Modular Routing
 - [ ] Unit Testing using Jest or Cypress

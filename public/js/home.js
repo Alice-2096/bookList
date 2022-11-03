@@ -5,6 +5,7 @@ const booksContainer = document.querySelector('.books-to-read');
 const completedContainer = document.querySelector('.completed');
 const newbookTitle = document.getElementById('newbook-title');
 const logoutBtn = document.getElementById('logout');
+const searchBar = document.querySelector('.search-bar-input');
 
 var oldTitle = '';
 var oldContent = '';
@@ -12,6 +13,15 @@ var oldContent = '';
 //header -- logout button -- redirect to the log out page onclick
 logoutBtn.addEventListener('click', function () {
   location.href = './logout';
+});
+
+//search bar -- Link terms in the search bar to Google-Book articles in a new webpage
+searchBar.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const keyword = e.target.value;
+    window.open(`https://en.wikipedia.org/wiki/${keyword}`, '_blank');
+    e.target.value = '';
+  }
 });
 
 //modal dropdown window
