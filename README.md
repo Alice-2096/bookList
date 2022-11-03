@@ -34,7 +34,7 @@ MySQL or MongoDB will be used to interact with the database.
 - [x] Set To-read booklist priority by clicking on the 'star' button
 - [x] fix DB and frontend logic on '/home'
 - [x] implement search bar functionality  
-- [ ] book recommendation based on websearch 'What is Popular?/Book of the Month'
+- [ ] fetch book recommendations from NYT Book API: https://developer.nytimes.com/docs/books-product/1/routes/lists.json/get 
 - [x] Modular Routing
 - [ ] Unit Testing using Jest or Cypress
 - [ ] deploy the application on Heroku when all tasks are complete :tada:
