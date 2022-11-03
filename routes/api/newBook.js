@@ -5,7 +5,7 @@ export default async (req, res) => {
   try {
     const { bookTitle } = req.body;
     const user = await findUser(req.session.user.email);
-    const newbook = await addBookToRead(bookTitle, user);
+    const newbook = addBookToRead(bookTitle, user);
     res.send(newbook._id);
     Promise.resolve(newbook._id);
   } catch (error) {

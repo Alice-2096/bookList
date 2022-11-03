@@ -3,7 +3,7 @@ import User from '../models/user.js';
 //Sign-up: create a new user
 export const signUp = async ({ name, email, password }) => {
   try {
-    await User.create({ name, email, password }); //create a new document
+    User.create({ name, email, password }); //create a new document
     return Promise.resolve();
   } catch (error) {
     return Promise.reject({ error });
@@ -15,7 +15,7 @@ export const logIn = async ({ name, password }) => {
   try {
     const user = await User.findOne({ name });
     await user.checkPassword(password);
-    await user.updateLoggedIn();
+    user.updateLoggedIn();
     return Promise.resolve(user); //return user if log in successfully
   } catch (error) {
     return Promise.reject(error);
