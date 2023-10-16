@@ -1,12 +1,13 @@
 import Book from '../models/book.js';
 
 //sort by priority
+// aggregation such as sorting is done on the server side, only the result will be passed back to the client. 
+// but sorting is client-side....
 // !this does not seem to work...but sorting on server will take care of the problem
 export const sortByPriority = async () => {
   Book.find().sort({ priority: -1 });
 };
 
-// ? I filtered data (finishedReading, Priority) both on server and DB side. This might not be the most efficient way, though. Can Mongoose/server do all the work?
 
 export const getBooksToRead = async (email) => {
   const books = await Book.find().populate({
